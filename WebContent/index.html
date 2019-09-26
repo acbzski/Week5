@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Car Show Room - Add Car</title>
+<style>
+body {
+	background-color: darkslategray;
+	color: snow;
+	font-family: sans-serif;
+}
+a {color: snow;}
+a:visited {color: snow;}
+</style>
+</head>
+<body>
+<h1>Car Show Room</h1>
+<h3>Add A Car</h3>
+<form action ="addCarServlet" method="post">
+Year: <input type="number" min=1885 max=2020 name="year">
+Make: <input type="text" name="make">
+Model: <input type="text" name="model"><br />
+<input type="submit" value="Add Car">
+</form><br />
+<a href = "viewAllCarsServlet">View the complete list</a>
+</body>
+</html>
