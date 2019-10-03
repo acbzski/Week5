@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.Car;
+import model.ListDetails;
 
 /**
  * Servlet implementation class navigationServlet
@@ -29,6 +30,7 @@ public class navigationServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CarHelper ch = new CarHelper();
+		ListDetailsHelper ldh = new ListDetailsHelper();
 		String act = request.getParameter("doThisToCar");
 		
 		if (act == null) {
@@ -54,7 +56,17 @@ public class navigationServlet extends HttpServlet {
 			}
 		} else if (act.equals("Add")) {
 			getServletContext().getRequestDispatcher("/index.html").forward(request, response);
-		}		
+		} else if (act.equals("Delete List")) {
+			try {
+				Integer tempId = Integer.parseInt(request.getParameter("id"));
+				ListDetails listToDelete = ldh.searchForListById(tempId);
+				ldh.deleteList(listToDelete);
+			} catch (NumberFormatException e) {
+				System.out.println("Forgot to click a button!");
+			} finally {
+				getServletContext().getRequestDispatcher("/viewAllListsServlet").forward(request, response);
+			}
+		}
 	}
 
 }
